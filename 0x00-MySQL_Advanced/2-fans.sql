@@ -1,5 +1,6 @@
--- Rank the countries by the number of fans
-SELECT origin, nb_fans,
-       RANK() OVER (ORDER BY nb_fans DESC) AS country_rank
-FROM band_fans_count
+-- Ranks the country origins of bands
+SELECT origin, SUM(nb_fans) AS nb_fans
+FROM metal_bands
+GROUP BY origin
 ORDER BY nb_fans DESC;
+
