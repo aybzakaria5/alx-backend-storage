@@ -1,0 +1,4 @@
+// showing databases in NOSQL => MONGODB
+
+show dbs
+
