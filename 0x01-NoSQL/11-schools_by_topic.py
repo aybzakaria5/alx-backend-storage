@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-"""finding"""
+"""
+finding a document in a collection
+"""
 
 
 def schools_by_topic(mongo_collection, topic):
-    """task 11"""
-    mongo_collection.find({"topic": topic})
+    """task 11²:w
+    """
+    return mongo_collection.find({"topics": topic})
