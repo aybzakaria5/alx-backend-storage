@@ -26,3 +26,9 @@ class Cache:
         if fn is not None:
             return fn(data)
         return data
+
+    def get_str(self, key: str) -> Union[str, None]:
+        return self.get(key, fn=lambda d: d.decode("utf-8"))
+
+    def get_int(self, key: str) -> Union[int, None]:
+        return self.get(key, fn=int)
