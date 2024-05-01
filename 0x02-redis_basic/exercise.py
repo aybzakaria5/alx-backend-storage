@@ -32,3 +32,12 @@ class Cache:
 
     def get_int(self, key: str) -> Union[int, None]:
         return self.get(key, fn=int)
+
+    def count_calls(method: Callable) -> Callable:
+        @wraps(method)
+        def wrapper(self, *args, **kwargs):
+            key = method.__qualname__
+            count_key = f"{key}_calls"
+            self._redis.incr(count_key)
+            return method(self, *args, **kwargs)
+        return wrapper
