@@ -5,12 +5,22 @@ import uuid
 from typing import Union, Callable
 
 
+def count_calls(method: Callable) -> Callable:
+        @wraps(method)
+        def wrapper(self, *args, **kwargs):
+            key = method.__qualname__
+            count_key = f"{key}_calls"
+            self._redis.incr(count_key)
+            return method(self, *args, **kwargs)
+        return wrapper
+
 class Cache:
     """a class for cache"""
     def __init__(self):
         """constructure"""
         self._redis = redis.Redis()
         self._redis.flushdb()
+    @count_calls
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """dàc for store methode"""
